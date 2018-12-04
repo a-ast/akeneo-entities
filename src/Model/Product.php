@@ -1,6 +1,6 @@
 <?php
 
-namespace Aa\AkeneoEntities\Model;
+namespace Aa\Akeneo\Entities\Model;
 
 class Product implements PimEntityInterface
 {

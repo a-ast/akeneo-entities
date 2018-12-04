@@ -13,12 +13,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Aa\\AkeneoEntities\\": "src/"
+            "Aa\\Akeneo\\Entities\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "spec\\Aa\\AkeneoEntities\\": "spec/"
+            "spec\\Aa\\Akeneo\\Entities\\": "spec/"
         }
     }
 }
