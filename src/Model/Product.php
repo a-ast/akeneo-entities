@@ -29,6 +29,11 @@ class Product implements PimEntityInterface
      */
     private $created;
 
+    /**
+     * @var array
+     */
+    private $values;
+
     public function __construct(string $identifier, ?string $family = null, ?string $modelCode = null, bool $enabled = false)
     {
         $this->family = $family;
@@ -98,4 +103,13 @@ class Product implements PimEntityInterface
         return $this;
     }
 
+    public function addValue(string $attributeCode, $value)
+    {
+        $this->values[$attributeCode] = $value;
+    }
+
+    public function getValues(): array
+    {
+        return $this->values;
+    }
 }
