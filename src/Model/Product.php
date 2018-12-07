@@ -2,6 +2,11 @@
 
 namespace Aa\Akeneo\Entities\Model;
 
+/**
+ * PIM Product
+ *
+ * @see https://api.akeneo.com/api-reference.html#patch_products__code_
+ */
 class Product implements PimEntityInterface
 {
     /**
@@ -10,37 +15,50 @@ class Product implements PimEntityInterface
     private $identifier;
 
     /**
-     * @var string
+     * @var bool
+     */
+    private $enabled = true;
+
+    /**
+     * @var string|null
      */
     private $family;
 
     /**
-     * @var null|string
+     * @var array|string[]
      */
-    private $modelCode;
+    private $categories = [];
 
     /**
-     * @var bool
+     * @var array|string[]
      */
-    private $enabled;
+    private $groups = [];
+
+    /**
+     * @var string|null
+     */
+    private $parent;
+
+    /**
+     * @var array
+     */
+    private $values = [];
+
+    /**
+     * @var array
+     *
+     * @todo: should be object
+     */
+    private $associations = [];
 
     /**
      * @var \DateTimeInterface
      */
     private $created;
 
-    /**
-     * @var array
-     */
-    private $values;
-
-    public function __construct(string $identifier, ?string $family = null, ?string $modelCode = null, bool $enabled = false)
+    public function __construct(string $identifier)
     {
-        $this->family = $family;
         $this->identifier = $identifier;
-        $this->modelCode = $modelCode;
-        $this->enabled = $enabled;
-        $this->created = new \DateTimeImmutable();
     }
 
     public function getIdentifier(): string
@@ -67,14 +85,14 @@ class Product implements PimEntityInterface
         return $this;
     }
 
-    public function getModelCode(): ?string
+    public function getParent(): ?string
     {
-        return $this->modelCode;
+        return $this->parent;
     }
 
-    public function setModelCode(?string $modelCode): self
+    public function setParent(?string $parent): self
     {
-        $this->modelCode = $modelCode;
+        $this->parent = $parent;
 
         return $this;
     }
@@ -103,13 +121,55 @@ class Product implements PimEntityInterface
         return $this;
     }
 
-    public function addValue(string $attributeCode, $value)
+    public function addValue(string $attributeCode, $value, ?string $locale = null, ?string $scope = null): self
     {
-        $this->values[$attributeCode] = $value;
+        $this->values[$attributeCode][] = [
+            'data' => $value,
+            'locale' => $locale,
+            'scope' => $scope,
+        ];
+
+        return $this;
     }
 
     public function getValues(): array
     {
         return $this->values;
+    }
+
+    public function getAssociations(): array
+    {
+        return $this->associations;
+    }
+
+    public function setAssociations(array $associations): self
+    {
+        $this->associations = $associations;
+
+        return $this;
+    }
+
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    public function setCategories($categories): self
+    {
+        $this->categories = $categories;
+
+        return $this;
+    }
+
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    public function setGroups($groups): self
+    {
+        $this->groups = $groups;
+
+        return $this;
     }
 }
