@@ -2,7 +2,7 @@
 
 namespace Aa\Akeneo\ImportCommands;
 
-interface CommandCollectionInterface
+interface CommandListInterface
 {
     public function add(CommandInterface $command);
 }

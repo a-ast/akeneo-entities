@@ -2,7 +2,7 @@
 
 namespace Aa\Akeneo\ImportCommands;
 
-class CommandCollection extends \ArrayObject implements CommandCollectionInterface
+class CommandList extends \ArrayObject implements CommandListInterface
 {
     public function add(CommandInterface $command)
     {
