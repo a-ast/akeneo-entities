@@ -1,3 +1,3 @@
-# Akeneo Entities
+# Akeneo Import Commands
 
-Base interfaces and entities for Akeneo Data Import.
+Commands for Akeneo Data Import.

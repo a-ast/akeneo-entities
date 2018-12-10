@@ -1,15 +1,15 @@
 <?php
 
-namespace Aa\Akeneo\Entities\Model;
+namespace Aa\Akeneo\ImportCommands\Product;
 
-use DateTimeInterface;
+use Aa\Akeneo\ImportCommands\CommandInterface;
 
 /**
- * PIM Product
+ * Update Product
  *
  * @see https://api.akeneo.com/api-reference.html#patch_products__code_
  */
-class Product implements PimEntityInterface
+class UpdateProduct implements CommandInterface
 {
     /**
      * @var string
