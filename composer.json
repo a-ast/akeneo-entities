@@ -1,6 +1,6 @@
 {
-    "name": "aa/akeneo-entities",
-    "description": "Akeneo entities for data import",
+    "name": "aa/akeneo-import-commands",
+    "description": "Akeneo commands for import",
     "type": "library",
     "authors": [
         {
