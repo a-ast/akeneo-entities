@@ -2,6 +2,8 @@
 
 namespace Aa\Akeneo\Entities\Model;
 
+use DateTimeInterface;
+
 /**
  * PIM Product
  *
@@ -52,7 +54,7 @@ class Product implements PimEntityInterface
     private $associations = [];
 
     /**
-     * @var \DateTimeInterface
+     * @var DateTimeInterface
      */
     private $created;
 
@@ -73,7 +75,7 @@ class Product implements PimEntityInterface
         return $this;
     }
 
-    public function getFamily(): string
+    public function getFamily(): ?string
     {
         return $this->family;
     }
@@ -109,12 +111,12 @@ class Product implements PimEntityInterface
         return $this;
     }
 
-    public function getCreated(): \DateTimeInterface
+    public function getCreated(): ?DateTimeInterface
     {
         return $this->created;
     }
 
-    public function setCreated(\DateTimeInterface $created): self
+    public function setCreated(DateTimeInterface $created): self
     {
         $this->created = $created;
 
