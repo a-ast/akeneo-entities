@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ProductUpdater\Exceptions;
+namespace App\ProductUpdater\Exception;
 
 use RuntimeException;
 
