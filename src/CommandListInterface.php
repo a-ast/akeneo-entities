@@ -1,6 +1,6 @@
 <?php
 
-namespace Aa\Akeneo\ImportCommands;
+namespace Aa\AkeneoImport\ImportCommands;
 
 interface CommandListInterface
 {

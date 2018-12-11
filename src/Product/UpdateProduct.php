@@ -1,8 +1,8 @@
 <?php
 
-namespace Aa\Akeneo\ImportCommands\Product;
+namespace Aa\AkeneoImport\ImportCommands\Product;
 
-use Aa\Akeneo\ImportCommands\CommandInterface;
+use Aa\AkeneoImport\ImportCommands\CommandInterface;
 
 /**
  * Update Product

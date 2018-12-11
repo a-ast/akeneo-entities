@@ -13,12 +13,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Aa\\Akeneo\\ImportCommands\\": "src/"
+            "Aa\\AkeneoImport\\ImportCommands\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "spec\\Aa\\Akeneo\\ImportCommands\\": "spec/"
+            "spec\\Aa\\AkeneoImport\\ImportCommands\\": "spec/"
         }
     }
 }
