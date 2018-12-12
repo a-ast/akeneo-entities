@@ -2,7 +2,11 @@
 
 namespace Aa\AkeneoImport\ImportCommands;
 
-interface CommandListInterface
+use Countable;
+
+interface CommandListInterface extends Countable
 {
-    public function add(CommandInterface $command);
+    public function getCommandClass(): string;
+
+    public function getItems(): array;
 }

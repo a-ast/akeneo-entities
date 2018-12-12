@@ -2,6 +2,7 @@
 
 namespace Aa\AkeneoImport\ImportCommands\Product;
 
+use Aa\AkeneoImport\ImportCommands\ValuesAwareTrait;
 use Aa\AkeneoImport\ImportCommands\CategoriesAwareTrait;
 use Aa\AkeneoImport\ImportCommands\CommandWithValuesTrait;
 use Aa\AkeneoImport\ImportCommands\CommandInterface;
@@ -14,7 +15,7 @@ use DateTimeInterface;
  */
 class UpdateProduct implements CommandInterface
 {
-    use CommandWithValuesTrait, CategoriesAwareTrait;
+    use ValuesAwareTrait, CategoriesAwareTrait;
 
     /**
      * @var string
