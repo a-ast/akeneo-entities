@@ -3,6 +3,7 @@
 namespace Aa\AkeneoImport\ImportCommands\Product;
 
 use Aa\AkeneoImport\ImportCommands\CommandInterface;
+use DateTimeInterface;
 
 /**
  * Update Product
@@ -61,6 +62,8 @@ class UpdateProduct implements CommandInterface
     public function __construct(string $identifier)
     {
         $this->identifier = $identifier;
+        // @todo: test setting null as created. Option: implement new DateTimeNormalizer that accepts nulls
+//        $this->created = $created ?? new \DateTimeImmutable();
     }
 
     public function getIdentifier(): string
@@ -80,7 +83,7 @@ class UpdateProduct implements CommandInterface
         return $this->family;
     }
 
-    public function setFamily(string $family): self
+    public function setFamily(?string $family): self
     {
         $this->family = $family;
 
@@ -116,17 +119,17 @@ class UpdateProduct implements CommandInterface
         return $this->created;
     }
 
-    public function setCreated(DateTimeInterface $created): self
+    public function setCreated(?DateTimeInterface $created = null): self
     {
         $this->created = $created;
 
         return $this;
     }
 
-    public function addValue(string $attributeCode, $value, ?string $locale = null, ?string $scope = null): self
+    public function addValue(string $attributeCode, $data, ?string $locale = null, ?string $scope = null): self
     {
         $this->values[$attributeCode][] = [
-            'data' => $value,
+            'data' => $data,
             'locale' => $locale,
             'scope' => $scope,
         ];
@@ -137,6 +140,13 @@ class UpdateProduct implements CommandInterface
     public function getValues(): array
     {
         return $this->values;
+    }
+
+    public function setValues(array $values): self
+    {
+        $this->values = $values;
+
+        return $this;
     }
 
     public function getAssociations(): array
@@ -151,24 +161,24 @@ class UpdateProduct implements CommandInterface
         return $this;
     }
 
-    public function getCategories()
+    public function getCategories(): array
     {
         return $this->categories;
     }
 
-    public function setCategories($categories): self
+    public function setCategories(array $categories): self
     {
         $this->categories = $categories;
 
         return $this;
     }
 
-    public function getGroups()
+    public function getGroups(): array
     {
         return $this->groups;
     }
 
-    public function setGroups($groups): self
+    public function setGroups(array $groups): self
     {
         $this->groups = $groups;
 
