@@ -2,6 +2,8 @@
 
 namespace Aa\AkeneoImport\ImportCommands\Product;
 
+use Aa\AkeneoImport\ImportCommands\CategoriesAwareTrait;
+use Aa\AkeneoImport\ImportCommands\CommandWithValuesTrait;
 use Aa\AkeneoImport\ImportCommands\CommandInterface;
 use DateTimeInterface;
 
@@ -12,6 +14,8 @@ use DateTimeInterface;
  */
 class UpdateProduct implements CommandInterface
 {
+    use CommandWithValuesTrait, CategoriesAwareTrait;
+
     /**
      * @var string
      */
@@ -30,22 +34,12 @@ class UpdateProduct implements CommandInterface
     /**
      * @var array|string[]
      */
-    private $categories = [];
-
-    /**
-     * @var array|string[]
-     */
     private $groups = [];
 
     /**
      * @var string|null
      */
     private $parent;
-
-    /**
-     * @var array
-     */
-    private $values = [];
 
     /**
      * @var array
@@ -126,29 +120,6 @@ class UpdateProduct implements CommandInterface
         return $this;
     }
 
-    public function addValue(string $attributeCode, $data, ?string $locale = null, ?string $scope = null): self
-    {
-        $this->values[$attributeCode][] = [
-            'data' => $data,
-            'locale' => $locale,
-            'scope' => $scope,
-        ];
-
-        return $this;
-    }
-
-    public function getValues(): array
-    {
-        return $this->values;
-    }
-
-    public function setValues(array $values): self
-    {
-        $this->values = $values;
-
-        return $this;
-    }
-
     public function getAssociations(): array
     {
         return $this->associations;
@@ -157,18 +128,6 @@ class UpdateProduct implements CommandInterface
     public function setAssociations(array $associations): self
     {
         $this->associations = $associations;
-
-        return $this;
-    }
-
-    public function getCategories(): array
-    {
-        return $this->categories;
-    }
-
-    public function setCategories(array $categories): self
-    {
-        $this->categories = $categories;
 
         return $this;
     }
