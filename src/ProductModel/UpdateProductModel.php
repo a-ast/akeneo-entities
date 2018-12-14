@@ -15,7 +15,7 @@ use DateTimeInterface;
  */
 class UpdateProductModel implements CommandInterface
 {
-    use ValuesAwareTrait; //, CategoriesAwareTrait;
+    use ValuesAwareTrait, CategoriesAwareTrait;
 
     public function __construct(string $code, string $familyVariant)
     {
@@ -32,13 +32,6 @@ class UpdateProductModel implements CommandInterface
     public function setParent(?string $parent): self
     {
         $this->set('parent', $parent);
-
-        return $this;
-    }
-
-    public function setCreated(?DateTimeInterface $created = null): self
-    {
-        $this->set('created', $created);
 
         return $this;
     }

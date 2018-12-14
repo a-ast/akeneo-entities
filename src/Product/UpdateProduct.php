@@ -15,7 +15,7 @@ use DateTimeInterface;
  */
 class UpdateProduct extends BaseCommand implements CommandInterface
 {
-    use ValuesAwareTrait; //, CategoriesAwareTrait;
+    use ValuesAwareTrait, CategoriesAwareTrait;
 
     public function __construct(string $identifier)
     {
@@ -39,13 +39,6 @@ class UpdateProduct extends BaseCommand implements CommandInterface
     public function setEnabled(?bool $enabled): self
     {
         $this->set('enabled', $enabled);
-
-        return $this;
-    }
-
-    public function setCreated(?DateTimeInterface $created = null): self
-    {
-        $this->set('created', $created);
 
         return $this;
     }
