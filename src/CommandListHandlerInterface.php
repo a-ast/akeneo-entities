@@ -2,7 +2,7 @@
 
 namespace Aa\AkeneoImport\ImportCommands;
 
-interface CommandHandlerInterface
+interface CommandListHandlerInterface
 {
     public function handle(CommandListInterface $commands);
 }

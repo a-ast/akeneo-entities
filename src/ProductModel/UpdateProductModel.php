@@ -15,78 +15,30 @@ use DateTimeInterface;
  */
 class UpdateProductModel implements CommandInterface
 {
-    use ValuesAwareTrait, CategoriesAwareTrait;
-
-    /**
-     * @var string
-     */
-    private $code;
-
-    /**
-     * @var string|null
-     */
-    private $familyVariant;
-
-    /**
-     * @var string|null
-     */
-    private $parent;
-
-    /**
-     * @var DateTimeInterface
-     */
-    private $created;
+    use ValuesAwareTrait; //, CategoriesAwareTrait;
 
     public function __construct(string $code, string $familyVariant)
     {
-        $this->code = $code;
-        $this->familyVariant = $familyVariant;
-    }
-
-    public function getCode(): string
-    {
-        return $this->code;
-    }
-
-    public function setCode(string $code): self
-    {
-        $this->code = $code;
-
-        return $this;
-    }
-
-    public function getFamilyVariant(): ?string
-    {
-        return $this->family;
+        $this->set('code', $code);
     }
 
     public function setFamilyVariant(?string $familyVariant): self
     {
-        $this->family = $family;
+        $this->set('family_variant', $familyVariant);
 
         return $this;
-    }
-
-    public function getParent(): ?string
-    {
-        return $this->parent;
     }
 
     public function setParent(?string $parent): self
     {
-        $this->parent = $parent;
+        $this->set('parent', $parent);
 
         return $this;
     }
 
-    public function getCreated(): ?DateTimeInterface
-    {
-        return $this->created;
-    }
-
     public function setCreated(?DateTimeInterface $created = null): self
     {
-        $this->created = $created;
+        $this->set('created', $created);
 
         return $this;
     }

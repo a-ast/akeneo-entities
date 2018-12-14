@@ -2,9 +2,9 @@
 
 namespace Aa\AkeneoImport\ImportCommands\Product;
 
+use Aa\AkeneoImport\ImportCommands\BaseCommand;
 use Aa\AkeneoImport\ImportCommands\ValuesAwareTrait;
 use Aa\AkeneoImport\ImportCommands\CategoriesAwareTrait;
-use Aa\AkeneoImport\ImportCommands\CommandWithValuesTrait;
 use Aa\AkeneoImport\ImportCommands\CommandInterface;
 use DateTimeInterface;
 
@@ -13,134 +13,53 @@ use DateTimeInterface;
  *
  * @see https://api.akeneo.com/api-reference.html#patch_products__code_
  */
-class UpdateProduct implements CommandInterface
+class UpdateProduct extends BaseCommand implements CommandInterface
 {
-    use ValuesAwareTrait, CategoriesAwareTrait;
-
-    /**
-     * @var string
-     */
-    private $identifier;
-
-    /**
-     * @var bool
-     */
-    private $enabled = true;
-
-    /**
-     * @var string|null
-     */
-    private $family;
-
-    /**
-     * @var array|string[]
-     */
-    private $groups = [];
-
-    /**
-     * @var string|null
-     */
-    private $parent;
-
-    /**
-     * @var array
-     *
-     * @todo: should be object
-     */
-    private $associations = [];
-
-    /**
-     * @var DateTimeInterface
-     */
-    private $created;
+    use ValuesAwareTrait; //, CategoriesAwareTrait;
 
     public function __construct(string $identifier)
     {
-        $this->identifier = $identifier;
-        // @todo: test setting null as created. Option: implement new DateTimeNormalizer that accepts nulls
-//        $this->created = $created ?? new \DateTimeImmutable();
-    }
-
-    public function getIdentifier(): string
-    {
-        return $this->identifier;
-    }
-
-    public function setIdentifier(string $identifier): self
-    {
-        $this->identifier = $identifier;
-
-        return $this;
-    }
-
-    public function getFamily(): ?string
-    {
-        return $this->family;
+        $this->set('identifier', $identifier);
     }
 
     public function setFamily(?string $family): self
     {
-        $this->family = $family;
+        $this->set('family', $family);
 
         return $this;
-    }
-
-    public function getParent(): ?string
-    {
-        return $this->parent;
     }
 
     public function setParent(?string $parent): self
     {
-        $this->parent = $parent;
+        $this->set('parent', $parent);
 
         return $this;
     }
 
-    public function isEnabled(): bool
+    public function setEnabled(?bool $enabled): self
     {
-        return $this->enabled;
-    }
-
-    public function setEnabled(bool $enabled): self
-    {
-        $this->enabled = $enabled;
+        $this->set('enabled', $enabled);
 
         return $this;
-    }
-
-    public function getCreated(): ?DateTimeInterface
-    {
-        return $this->created;
     }
 
     public function setCreated(?DateTimeInterface $created = null): self
     {
-        $this->created = $created;
+        $this->set('created', $created);
 
         return $this;
-    }
-
-    public function getAssociations(): array
-    {
-        return $this->associations;
     }
 
     public function setAssociations(array $associations): self
     {
-        $this->associations = $associations;
+        $this->set('associations', $associations);
 
         return $this;
     }
 
-    public function getGroups(): array
-    {
-        return $this->groups;
-    }
-
     public function setGroups(array $groups): self
     {
-        $this->groups = $groups;
+        $this->set('groups', $groups);
 
         return $this;
     }
