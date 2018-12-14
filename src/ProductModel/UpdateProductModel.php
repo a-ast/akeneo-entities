@@ -1,19 +1,18 @@
 <?php
 
-namespace Aa\AkeneoImport\ImportCommands\Product;
+namespace Aa\AkeneoImport\ImportCommands\ProductModel;
 
+use Aa\AkeneoImport\ImportCommands\BaseCommand;
 use Aa\AkeneoImport\ImportCommands\ValuesAwareTrait;
 use Aa\AkeneoImport\ImportCommands\CategoriesAwareTrait;
-use Aa\AkeneoImport\ImportCommands\CommandWithValuesTrait;
 use Aa\AkeneoImport\ImportCommands\CommandInterface;
-use DateTimeInterface;
 
 /**
  * Update Product model
  *
  * @see https://api.akeneo.com/api-reference.html#patch_product_models
  */
-class UpdateProductModel implements CommandInterface
+class UpdateProductModel extends BaseCommand implements CommandInterface
 {
     use ValuesAwareTrait, CategoriesAwareTrait;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Aa\AkeneoImport\ImportCommands\Exceptions;
+namespace Aa\AkeneoImport\ImportCommands\Exception;
 
 use RuntimeException;
 
