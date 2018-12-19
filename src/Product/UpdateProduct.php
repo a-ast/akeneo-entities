@@ -6,7 +6,6 @@ use Aa\AkeneoImport\ImportCommands\BaseCommand;
 use Aa\AkeneoImport\ImportCommands\ValuesAwareTrait;
 use Aa\AkeneoImport\ImportCommands\CategoriesAwareTrait;
 use Aa\AkeneoImport\ImportCommands\CommandInterface;
-use DateTimeInterface;
 
 /**
  * Update Product
