@@ -16,7 +16,7 @@ class UpdateProductModel extends BaseCommand implements CommandInterface
 {
     use ValuesAwareTrait, CategoriesAwareTrait;
 
-    public function __construct(string $code, string $familyVariant)
+    public function __construct(string $code)
     {
         $this->set('code', $code);
     }
