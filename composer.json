@@ -13,12 +13,15 @@
     },
     "autoload": {
         "psr-4": {
-            "Aa\\AkeneoImport\\ImportCommands\\": "src/"
+            "Aa\\AkeneoImport\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "spec\\Aa\\AkeneoImport\\ImportCommands\\": "spec/"
+            "spec\\Aa\\AkeneoImport\\": "spec/"
         }
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^5.1"
     }
 }
