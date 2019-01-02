@@ -1,6 +1,6 @@
 <?php
 
-namespace Aa\AkeneoImport\Serializer;
+namespace Aa\AkeneoImport\Normalizer;
 
 use Aa\AkeneoImport\ImportCommand\CommandList;
 use Aa\AkeneoImport\ImportCommand\CommandListInterface;
