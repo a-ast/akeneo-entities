@@ -3,7 +3,9 @@
 namespace Aa\AkeneoImport\Normalizer;
 
 use Aa\AkeneoImport\ArrayFormattable;
+use Aa\AkeneoImport\ImportCommand\BaseCommand;
 use ReflectionClass;
+use ReflectionMethod;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -51,9 +53,50 @@ class CommandNormalizer implements NormalizerInterface, DenormalizerInterface
     {
         $reflectionClass = new ReflectionClass($class);
 
+        $command = $this->instantiateCommand($reflectionClass, $data, $format, $context);
+
+        foreach ($data as $fieldName => $item) {
+
+            $methodName = sprintf('set%s', ucfirst($this->nameConverter->normalize($fieldName)));
+
+            if (!$reflectionClass->hasMethod($methodName)) {
+                continue;
+            }
+
+            $method = $reflectionClass->getMethod($methodName);
+
+            $parameterClass = $this->getSetterParameterClass($method);
+
+            if (null !== $parameterClass) {
+                $item = $this->denormalizer->denormalize($item, $parameterClass->getName(), $format, $context);
+            }
+
+            $method->invoke($command, $item);
+        }
+
+        return $command;
+    }
+
+    public function supportsDenormalization($data, $type, $format = null)
+    {
+        if (!class_exists($type)) {
+            return false;
+        }
+
+        $reflectionClass = new ReflectionClass($type);
+
+        return $reflectionClass->implementsInterface(ArrayFormattable::class);
+    }
+
+
+    private function instantiateCommand(ReflectionClass $reflectionClass, array $data, string $format, array $context): BaseCommand
+    {
         $constructorParameters = $reflectionClass->getConstructor()->getParameters();
 
+        $arguments = [];
+
         foreach ($constructorParameters as $constructorParameter) {
+
             $parameterName = $this->nameConverter->denormalize($constructorParameter->getName());
 
             if (!isset($data[$parameterName])) {
@@ -73,40 +116,14 @@ class CommandNormalizer implements NormalizerInterface, DenormalizerInterface
 
         $command = $reflectionClass->newInstanceArgs($arguments);
 
-        foreach ($data as $fieldName => &$item) {
-
-            $methodName = sprintf('set%s', ucfirst($this->nameConverter->normalize($fieldName)));
-
-            if ($reflectionClass->hasMethod($methodName)) {
-
-                $method = $reflectionClass->getMethod($methodName);
-
-                $methodParameters = $method->getParameters();
-
-                $setterParameter = $methodParameters[0];
-
-                $parameterClass = $setterParameter->getClass();
-
-                if (null !== $parameterClass) {
-                    $item = $this->denormalizer->denormalize($item, $parameterClass->getName(), $format, $context);
-                }
-
-                $method->invoke($command, $item);
-
-            }
-        }
-
         return $command;
     }
 
-    public function supportsDenormalization($data, $type, $format = null)
+    private function getSetterParameterClass(ReflectionMethod $method): ?ReflectionClass
     {
-        if (!class_exists($type)) {
-            return false;
-        }
+        $methodParameters = $method->getParameters();
+        $setterParameter = $methodParameters[0];
 
-        $reflectionClass = new ReflectionClass($type);
-
-        return $reflectionClass->implementsInterface(ArrayFormattable::class);
+        return  $setterParameter->getClass();
     }
 }

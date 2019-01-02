@@ -20,10 +20,5 @@ class TestCommand extends BaseCommandWithValues
     {
         $this->set('date', $date);
     }
-
-    public function getDate(): \DateTimeInterface
-    {
-        return $this->data['date'];
-    }
 }
 
