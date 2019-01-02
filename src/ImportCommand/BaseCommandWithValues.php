@@ -2,26 +2,12 @@
 
 namespace Aa\AkeneoImport\ImportCommand;
 
-use Aa\AkeneoImport\ArrayFormattable;
-
 abstract class BaseCommandWithValues extends BaseCommand
 {
     /**
      * @var array
      */
     protected $values = [];
-
-    public function fromArray(array $data): ArrayFormattable
-    {
-        if (isset($data['values'])) {
-            $this->values = $data['values'];
-            unset($data['values']);
-        }
-
-        $this->data = $data;
-
-        return $this;
-    }
 
     public function toArray(): array
     {

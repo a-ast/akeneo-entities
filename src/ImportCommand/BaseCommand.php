@@ -16,13 +16,6 @@ abstract class BaseCommand implements ArrayFormattable
         $this->data[$fieldName] = $data;
     }
 
-    public function fromArray(array $data): ArrayFormattable
-    {
-        $this->data = $data;
-
-        return $this;
-    }
-
     public function toArray(): array
     {
         return $this->data;

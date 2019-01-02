@@ -96,8 +96,6 @@ class CommandNormalizer implements NormalizerInterface, DenormalizerInterface
             }
         }
 
-        //$command->fromArray($data);
-
         return $command;
     }
 
