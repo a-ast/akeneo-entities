@@ -63,7 +63,7 @@ class CommandNormalizer implements DenormalizerInterface, DenormalizerAwareInter
 
         foreach ($data as $fieldName => $item) {
 
-            $methodName = sprintf('set%s', ucfirst($this->nameConverter->normalize($fieldName)));
+            $methodName = sprintf('set%s', ucfirst($this->nameConverter->denormalize($fieldName)));
 
             if (!$reflectionClass->hasMethod($methodName)) {
                 continue;
@@ -105,7 +105,7 @@ class CommandNormalizer implements DenormalizerInterface, DenormalizerAwareInter
 
         foreach ($constructorParameters as $constructorParameter) {
 
-            $parameterName = $this->nameConverter->denormalize($constructorParameter->getName());
+            $parameterName = $this->nameConverter->normalize($constructorParameter->getName());
 
             if (!isset($data[$parameterName])) {
                 continue;
