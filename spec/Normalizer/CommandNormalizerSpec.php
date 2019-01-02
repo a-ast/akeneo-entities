@@ -6,6 +6,7 @@ use Aa\AkeneoImport\Normalizer\CommandNormalizer;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use spec\Aa\AkeneoImport\fixture\TestCommand;
+use spec\Aa\AkeneoImport\fixture\TestCommandWithConstructor;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
@@ -85,6 +86,38 @@ class CommandNormalizerSpec extends ObjectBehavior
                 'identifier' => 'test',
                 'date' => '2020-10-10T10:10:00+00:00',
             ]);
+    }
+
+    function it_denormalizes_a_command()
+    {
+        $expectedCommand = new TestCommand('test');
+        $expectedCommand->setDate(new \DateTime('2020-10-10 10:10'));
+
+        $data = [
+            'identifier' => 'test',
+            'date' => '2020-10-10T10:10:00+00:00',
+        ];
+
+        $command = $this
+            ->denormalize($data, TestCommand::class, 'standard');
+
+        $command->shouldBeLike($expectedCommand);
+    }
+
+    function it_denormalizes_a_command_with_complex_constructor()
+    {
+        $expectedCommand = new TestCommandWithConstructor('test', new \DateTime('2020-10-10 10:10'), ['a', 'b', 'c',]);
+
+        $data = [
+            'identifier' => 'test',
+            'date' => '2020-10-10T10:10:00+00:00',
+            'data' => ['a', 'b', 'c',],
+        ];
+
+        $command = $this
+            ->denormalize($data, TestCommandWithConstructor::class, 'standard');
+
+        $command->shouldBeLike($expectedCommand);
     }
 
     private function getSerializer(): SerializerInterface

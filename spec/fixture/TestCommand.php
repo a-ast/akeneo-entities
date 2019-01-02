@@ -2,9 +2,7 @@
 
 namespace spec\Aa\AkeneoImport\fixture;
 
-use Aa\AkeneoImport\ArrayFormattable;
 use Aa\AkeneoImport\ImportCommand\BaseCommandWithValues;
-use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 
 class TestCommand extends BaseCommandWithValues
 {
