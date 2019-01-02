@@ -9,7 +9,11 @@
         }
     ],
     "require": {
-        "php": ">=7.1"
+        "php": ">=7.1",
+        "symfony/serializer": "^4.2"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^5.1"
     },
     "autoload": {
         "psr-4": {
@@ -20,8 +24,5 @@
         "psr-4": {
             "spec\\Aa\\AkeneoImport\\": "spec/"
         }
-    },
-    "require-dev": {
-        "phpspec/phpspec": "^5.1"
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Aa\AkeneoImport\ImportCommands;
+namespace Aa\AkeneoImport\ImportCommand;
 
 
 class CommandList implements CommandListInterface

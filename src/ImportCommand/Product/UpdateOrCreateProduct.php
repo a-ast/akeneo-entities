@@ -1,21 +1,17 @@
 <?php
 
-namespace Aa\AkeneoImport\ImportCommands\Product;
+namespace Aa\AkeneoImport\ImportCommand\Product;
 
-use Aa\AkeneoImport\ImportCommands\BaseCommand;
-use Aa\AkeneoImport\ImportCommands\ValuesAwareTrait;
-use Aa\AkeneoImport\ImportCommands\CategoriesAwareTrait;
-use Aa\AkeneoImport\ImportCommands\CommandInterface;
+use Aa\AkeneoImport\ImportCommand\BaseCommandWithValues;
+use Aa\AkeneoImport\ImportCommand\CommandInterface;
 
 /**
  * Update Product
  *
  * @see https://api.akeneo.com/api-reference.html#patch_products__code_
  */
-class UpdateProduct extends BaseCommand implements CommandInterface
+class UpdateOrCreateProduct extends BaseCommandWithValues implements CommandInterface
 {
-    use ValuesAwareTrait, CategoriesAwareTrait;
-
     public function __construct(string $identifier)
     {
         $this->set('identifier', $identifier);
@@ -52,6 +48,13 @@ class UpdateProduct extends BaseCommand implements CommandInterface
     public function setGroups(array $groups): self
     {
         $this->set('groups', $groups);
+
+        return $this;
+    }
+
+    public function setCategories(array $categories): self
+    {
+        $this->set('categories', $categories);
 
         return $this;
     }
