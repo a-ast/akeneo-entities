@@ -50,17 +50,4 @@ class UpdateOrCreateProduct extends BaseUpdateProductCommand
 
         return $this;
     }
-
-    public function toArray(): array
-    {
-        if (count($this->values) > 0) {
-            return array_merge($this->data, ['values' => $this->values]);
-        }
-
-        if (count($this->values) > 0) {
-            return array_merge($this->data, ['values' => $this->values]);
-        }
-
-        return $this->data;
-    }
 }

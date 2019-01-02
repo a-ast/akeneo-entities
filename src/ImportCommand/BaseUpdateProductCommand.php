@@ -17,11 +17,11 @@ abstract class BaseUpdateProductCommand extends BaseCommand
     public function toArray(): array
     {
         if (count($this->values) > 0) {
-            return array_merge($this->data, ['values' => $this->values]);
+            $this->data = array_merge($this->data, ['values' => $this->values]);
         }
 
         if (count($this->associations) > 0) {
-            return array_merge($this->data, ['associations' => $this->associations]);
+            $this->data = array_merge($this->data, ['associations' => $this->associations]);
         }
 
         return $this->data;
