@@ -4,6 +4,8 @@ namespace Aa\AkeneoImport\Normalizer;
 
 use Aa\AkeneoImport\ArrayFormattable;
 use Aa\AkeneoImport\ImportCommand\BaseCommand;
+use Aa\AkeneoImport\ImportCommand\CommandInterface;
+use Aa\AkeneoImport\ImportCommand\CommandWithValuesInterface;
 use ReflectionClass;
 use ReflectionMethod;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
@@ -57,6 +59,8 @@ class CommandNormalizer implements DenormalizerInterface, DenormalizerAwareInter
 
         $command = $this->instantiateCommand($reflectionClass, $data, $format, $context);
 
+        $this->addValuesToCommand($command, $data);
+
         foreach ($data as $fieldName => $item) {
 
             $methodName = sprintf('set%s', ucfirst($this->nameConverter->normalize($fieldName)));
@@ -74,6 +78,8 @@ class CommandNormalizer implements DenormalizerInterface, DenormalizerAwareInter
             }
 
             $method->invoke($command, $item);
+
+
         }
 
         return $command;
@@ -127,5 +133,23 @@ class CommandNormalizer implements DenormalizerInterface, DenormalizerAwareInter
         $setterParameter = $methodParameters[0];
 
         return  $setterParameter->getClass();
+    }
+
+    private function addValuesToCommand(CommandInterface $command, array $data)
+    {
+        if (! $command instanceof CommandWithValuesInterface || !isset($data['values'])) {
+            return;
+        }
+
+        foreach ($data['values'] as $attributeCode => $variations) {
+            foreach ($variations as $valueData) {
+                $command->addValue(
+                    $attributeCode,
+                    $valueData['data'],
+                    $valueData['locale'],
+                    $valueData['scope']
+                );
+            }
+        }
     }
 }

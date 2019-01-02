@@ -4,7 +4,7 @@ namespace Aa\AkeneoImport\ImportCommand;
 
 use Aa\AkeneoImport\ArrayFormattable;
 
-abstract class BaseCommand implements ArrayFormattable
+abstract class BaseCommand implements ArrayFormattable, CommandInterface
 {
     /**
      * @var array

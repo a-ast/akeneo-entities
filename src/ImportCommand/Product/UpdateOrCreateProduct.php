@@ -3,14 +3,13 @@
 namespace Aa\AkeneoImport\ImportCommand\Product;
 
 use Aa\AkeneoImport\ImportCommand\BaseCommandWithValues;
-use Aa\AkeneoImport\ImportCommand\CommandInterface;
 
 /**
  * Update Product
  *
  * @see https://api.akeneo.com/api-reference.html#patch_products__code_
  */
-class UpdateOrCreateProduct extends BaseCommandWithValues implements CommandInterface
+class UpdateOrCreateProduct extends BaseCommandWithValues
 {
     public function __construct(string $identifier)
     {

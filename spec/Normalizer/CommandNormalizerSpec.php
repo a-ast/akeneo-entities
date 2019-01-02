@@ -104,6 +104,32 @@ class CommandNormalizerSpec extends ObjectBehavior
         $command->shouldBeLike($expectedCommand);
     }
 
+    function it_denormalizes_a_command_with_values()
+    {
+        $expectedCommand = new TestCommand('test');
+        $expectedCommand->setDate(new \DateTime('2020-10-10 10:10'));
+        $expectedCommand->addValue('attribute', 'value', 'en', 'shop');
+
+        $data = [
+            'identifier' => 'test',
+            'date' => '2020-10-10T10:10:00+00:00',
+            'values' => [
+                'attribute' => [
+                    [
+                        'data' => 'value',
+                        'locale' => 'en',
+                        'scope' => 'shop',
+                    ],
+                ],
+            ],
+        ];
+
+        $command = $this
+            ->denormalize($data, TestCommand::class, 'standard');
+
+        $command->shouldBeLike($expectedCommand);
+    }
+
     function it_denormalizes_a_command_with_complex_constructor()
     {
         $expectedCommand = new TestCommandWithConstructor('test', new \DateTime('2020-10-10 10:10'), ['a', 'b', 'c',]);

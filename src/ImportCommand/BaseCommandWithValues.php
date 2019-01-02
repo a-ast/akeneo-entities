@@ -2,7 +2,7 @@
 
 namespace Aa\AkeneoImport\ImportCommand;
 
-abstract class BaseCommandWithValues extends BaseCommand
+abstract class BaseCommandWithValues extends BaseCommand implements CommandWithValuesInterface
 {
     /**
      * @var array
@@ -18,7 +18,7 @@ abstract class BaseCommandWithValues extends BaseCommand
         return $this->data;
     }
 
-    public function addValue(string $attributeCode, $data, ?string $locale = null, ?string $scope = null): self
+    public function addValue(string $attributeCode, $data, ?string $locale = null, ?string $scope = null): CommandWithValuesInterface
     {
         $this->values[$attributeCode][] = [
             'data' => $data,
