@@ -30,7 +30,7 @@ class CommandListNormalizer implements DenormalizerInterface, DenormalizerAwareI
 
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return 'standard' === $format && CommandList::class === $type;
+        return CommandList::class === $type;
     }
 
     /**
@@ -49,6 +49,6 @@ class CommandListNormalizer implements DenormalizerInterface, DenormalizerAwareI
 
     public function supportsNormalization($data, $format = null)
     {
-        return 'standard' === $format && $data instanceof CommandListInterface;
+        return $data instanceof CommandListInterface;
     }
 }
