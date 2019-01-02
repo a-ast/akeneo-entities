@@ -2,14 +2,14 @@
 
 namespace Aa\AkeneoImport\ImportCommand\Product;
 
-use Aa\AkeneoImport\ImportCommand\BaseCommandWithValues;
+use Aa\AkeneoImport\ImportCommand\BaseUpdateProductCommand;
 
 /**
  * Update Product
  *
  * @see https://api.akeneo.com/api-reference.html#patch_products__code_
  */
-class UpdateOrCreateProduct extends BaseCommandWithValues
+class UpdateOrCreateProduct extends BaseUpdateProductCommand
 {
     public function __construct(string $identifier)
     {
@@ -56,5 +56,18 @@ class UpdateOrCreateProduct extends BaseCommandWithValues
         $this->set('categories', $categories);
 
         return $this;
+    }
+
+    public function toArray(): array
+    {
+        if (count($this->values) > 0) {
+            return array_merge($this->data, ['values' => $this->values]);
+        }
+
+        if (count($this->values) > 0) {
+            return array_merge($this->data, ['values' => $this->values]);
+        }
+
+        return $this->data;
     }
 }

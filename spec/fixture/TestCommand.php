@@ -2,9 +2,9 @@
 
 namespace spec\Aa\AkeneoImport\fixture;
 
-use Aa\AkeneoImport\ImportCommand\BaseCommandWithValues;
+use Aa\AkeneoImport\ImportCommand\BaseUpdateProductCommand;
 
-class TestCommand extends BaseCommandWithValues
+class TestCommand extends BaseUpdateProductCommand
 {
     public function __construct(string $identifier)
     {

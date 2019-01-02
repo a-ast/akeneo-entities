@@ -75,7 +75,7 @@ class CommandNormalizerSpec extends ObjectBehavior
             ]);
     }
 
-    function it_normalizes_a_command_with_datetimes()
+    function it_normalizes_a_command_with_datetime_field()
     {
         $command = new TestCommand('test');
         $command->setDate(new \DateTime('2020-10-10 10:10'));
@@ -85,6 +85,31 @@ class CommandNormalizerSpec extends ObjectBehavior
             ->shouldReturn([
                 'identifier' => 'test',
                 'date' => '2020-10-10T10:10:00+00:00',
+            ]);
+    }
+
+    function it_normalizes_a_command_with_associations()
+    {
+        $command = new TestCommand('test');
+        $command->setAssociations([
+            'PACK' => [
+                'groups' => ['a', 'b', 'c'],
+                'products' => ['g'],
+                'product_models' => ['e', 'f', 'k'],
+            ],
+        ]);
+
+        $this
+            ->normalize($command, 'standard')
+            ->shouldReturn([
+                'identifier' => 'test',
+                'associations' => [
+                    'PACK' => [
+                        'groups' => ['a', 'b', 'c'],
+                        'products' => ['g'],
+                        'product_models' => ['e', 'f', 'k'],
+                    ],
+                ],
             ]);
     }
 
