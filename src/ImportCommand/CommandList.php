@@ -21,6 +21,7 @@ class CommandList implements CommandListInterface
             $this->commandClass = get_class($items[0]);
 
             // @todo: check that all items are of the same class
+            // @todo: check that list contains commands - create spec
         }
 
         $this->items = $items;
