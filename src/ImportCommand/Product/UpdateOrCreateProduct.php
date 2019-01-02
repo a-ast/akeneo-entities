@@ -37,13 +37,6 @@ class UpdateOrCreateProduct extends BaseUpdateProductCommand
         return $this;
     }
 
-    public function setAssociations(array $associations): self
-    {
-        $this->set('associations', $associations);
-
-        return $this;
-    }
-
     public function setGroups(array $groups): self
     {
         $this->set('groups', $groups);
