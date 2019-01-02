@@ -65,9 +65,24 @@ abstract class BaseUpdateProductCommand extends BaseCommand
 
     public function addAssociatedGroups(string $associationTypeCode, array $groupCodes): self
     {
-        $existingGroupCodes = $this->associations[$associationTypeCode]['groups'] ?? [];
+        return $this->addAssociations('groups', $associationTypeCode, $groupCodes);
+    }
 
-        $this->associations[$associationTypeCode]['groups'] = array_merge($existingGroupCodes, $groupCodes);
+    public function addAssociatedProducts(string $associationTypeCode, array $productIdentifiers): self
+    {
+        return $this->addAssociations('products', $associationTypeCode, $productIdentifiers);
+    }
+
+    public function addAssociatedProductModels(string $associationTypeCode, array $productModelCodes): self
+    {
+        return $this->addAssociations('product_models', $associationTypeCode, $productModelCodes);
+    }
+
+    private function addAssociations(string $associationEntity, string $associationTypeCode, array $identifiers): self
+    {
+        $existingIdentifiers = $this->associations[$associationTypeCode][$associationEntity] ?? [];
+
+        $this->associations[$associationTypeCode][$associationEntity] = array_merge($existingIdentifiers, $identifiers);
 
         return $this;
     }
