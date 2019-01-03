@@ -4,6 +4,11 @@ namespace Aa\AkeneoImport\ImportCommand\Category;
 
 use Aa\AkeneoImport\ImportCommand\BaseCommand;
 
+/**
+ * Update or create categories
+ *
+ * @see: https://api.akeneo.com/api-reference.html#patch_categories
+ */
 class UpdateOrCreateCategory extends BaseCommand
 {
     public function __construct(string $code)
