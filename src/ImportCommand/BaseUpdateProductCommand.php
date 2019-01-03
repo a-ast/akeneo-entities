@@ -38,6 +38,18 @@ abstract class BaseUpdateProductCommand extends BaseCommand
         return $this;
     }
 
+    public function addImageValue(string $attributeCode, string $fileName, ?string $locale = null, ?string $scope = null): self
+    {
+        $this->values[$attributeCode][] = [
+            '@media' => $fileName,
+            'locale' => $locale,
+            'scope' => $scope,
+        ];
+
+        return $this;
+
+    }
+
     public function setValues(array $values): self
     {
         $this->values = $values;
