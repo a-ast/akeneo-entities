@@ -11,7 +11,7 @@ class UpdateOrCreateCategory extends BaseCommand
         $this->set('code', $code);
     }
 
-    public function setParent(string $parent): self
+    public function setParent(?string $parent): self
     {
         $this->set('parent', $parent);
 
