@@ -2,8 +2,6 @@
 
 namespace Aa\AkeneoImport\ImportCommand;
 
-use Aa\AkeneoImport\ImportCommand\Media\CreateProductMediaFile;
-
 abstract class BaseUpdateProductCommand extends BaseCommand implements CommandsAwareInterface
 {
     /**
@@ -68,14 +66,7 @@ abstract class BaseUpdateProductCommand extends BaseCommand implements CommandsA
         return $this->addMediaValue($attributeCode, $fileName, $locale, $scope);
     }
 
-    private function addMediaValue(string $attributeCode, string $fileName, ?string $locale = null, ?string $scope = null): self
-    {
-        $mediaCommand = new CreateProductMediaFile($fileName, $this->data['identifier'], $attributeCode, $scope, $locale);
-        $this->addExtraCommand($mediaCommand);
-
-        return $this;
-
-    }
+    abstract protected function addMediaValue(string $attributeCode, string $fileName, ?string $locale = null, ?string $scope = null): self;
 
     public function setValues(array $values): self
     {

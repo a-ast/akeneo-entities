@@ -3,6 +3,7 @@
 namespace Aa\AkeneoImport\ImportCommand\ProductModel;
 
 use Aa\AkeneoImport\ImportCommand\BaseUpdateProductCommand;
+use Aa\AkeneoImport\ImportCommand\Media\CreateProductModelMediaFile;
 
 /**
  * Update Product model
@@ -33,6 +34,14 @@ class UpdateOrCreateProductModel extends BaseUpdateProductCommand
     public function setCategories(array $categories): self
     {
         $this->set('categories', $categories);
+
+        return $this;
+    }
+
+    public function addMediaValue(string $attributeCode, string $fileName, ?string $locale = null, ?string $scope = null): self
+    {
+        $mediaCommand = new CreateProductModelMediaFile($fileName, $this->data['identifier'], $attributeCode, $scope, $locale);
+        $this->addExtraCommand($mediaCommand);
 
         return $this;
     }
