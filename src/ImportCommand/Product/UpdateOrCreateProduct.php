@@ -52,11 +52,9 @@ class UpdateOrCreateProduct extends BaseUpdateProductCommand
         return $this;
     }
 
-    public function addMediaValue(string $attributeCode, string $fileName, ?string $locale = null, ?string $scope = null): self
+    public function addMediaValue(string $attributeCode, string $fileName, ?string $locale = null, ?string $scope = null)
     {
         $mediaCommand = new CreateProductMediaFile($fileName, $this->data['identifier'], $attributeCode, $scope, $locale);
         $this->addExtraCommand($mediaCommand);
-
-        return $this;
     }
 }
