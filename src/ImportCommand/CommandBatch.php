@@ -3,7 +3,7 @@
 namespace Aa\AkeneoImport\ImportCommand;
 
 
-class CommandList implements CommandListInterface
+class CommandBatch implements CommandBatchInterface
 {
     /**
      * @var string

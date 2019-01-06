@@ -2,9 +2,9 @@
 
 namespace Aa\AkeneoImport\ImportCommand;
 
-interface CommandListHandlerInterface
+interface CommandBatchHandlerInterface
 {
-    public function handle(CommandListInterface $commands);
+    public function handle(CommandBatchInterface $commands);
 
     public function shouldKeepCommandOrder(): bool;
 }

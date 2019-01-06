@@ -4,7 +4,7 @@ namespace Aa\AkeneoImport\ImportCommand;
 
 use Countable;
 
-interface CommandListInterface extends Countable
+interface CommandBatchInterface extends Countable
 {
     public function getCommandClass(): string;
 

@@ -2,8 +2,8 @@
 
 namespace Aa\AkeneoImport\Normalizer;
 
-use Aa\AkeneoImport\ImportCommand\CommandList;
-use Aa\AkeneoImport\ImportCommand\CommandListInterface;
+use Aa\AkeneoImport\ImportCommand\CommandBatch;
+use Aa\AkeneoImport\ImportCommand\CommandBatchInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
@@ -25,16 +25,16 @@ class CommandListNormalizer implements DenormalizerInterface, DenormalizerAwareI
             $commands[] = $this->denormalizer->denormalize($item, $data['commandClass'], $format, $context);
         }
 
-        return new CommandList($commands);
+        return new CommandBatch($commands);
     }
 
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return CommandList::class === $type;
+        return CommandBatch::class === $type;
     }
 
     /**
-     * @param CommandList $object
+     * @param CommandBatch $object
      */
     public function normalize($object, $format = null, array $context = [])
     {
@@ -49,6 +49,6 @@ class CommandListNormalizer implements DenormalizerInterface, DenormalizerAwareI
 
     public function supportsNormalization($data, $format = null)
     {
-        return $data instanceof CommandListInterface;
+        return $data instanceof CommandBatchInterface;
     }
 }
