@@ -20,5 +20,14 @@ class TestCommand extends BaseUpdateProductCommand
     {
         $this->set('date', $date);
     }
+
+    protected function addMediaValue(
+        string $attributeCode,
+        string $fileName,
+        ?string $locale = null,
+        ?string $scope = null
+    ) {
+        // TODO: do nothing
+    }
 }
 
