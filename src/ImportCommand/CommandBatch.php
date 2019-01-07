@@ -3,6 +3,8 @@
 namespace Aa\AkeneoImport\ImportCommand;
 
 
+use Aa\AkeneoImport\ImportCommand\Exception\CommandBatchException;
+
 class CommandBatch implements CommandBatchInterface
 {
     /**
@@ -17,11 +19,21 @@ class CommandBatch implements CommandBatchInterface
 
     public function __construct(array $items = [])
     {
-        if (count($items) > 0) {
-            $this->commandClass = get_class($items[0]);
+        if (0 === count($items)) {
+            throw new CommandBatchException('Empty command batches are not allowed.');
+        }
 
-            // @todo: check that all items are of the same class
-            // @todo: check that list contains commands - create spec
+        $this->commandClass = get_class($items[0]);
+
+        foreach ($items as $item) {
+
+            if (!$item instanceof CommandInterface) {
+                throw new CommandBatchException('Only instances of CommandInterface allowed.');
+            }
+
+            if ($this->commandClass !== get_class($item)) {
+                throw new CommandBatchException('Commands of different types are not allowed');
+            }
         }
 
         $this->items = $items;
