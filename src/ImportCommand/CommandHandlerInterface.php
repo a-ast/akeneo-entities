@@ -2,7 +2,7 @@
 
 namespace Aa\AkeneoImport\ImportCommand;
 
-interface CommandBatchHandlerInterface
+interface CommandHandlerInterface
 {
     public function handle(CommandBatchInterface $commands);
 
