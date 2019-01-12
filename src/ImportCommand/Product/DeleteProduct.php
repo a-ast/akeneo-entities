@@ -2,7 +2,7 @@
 
 namespace Aa\AkeneoImport\ImportCommand\Product;
 
-use Aa\AkeneoImport\ImportCommand\BaseUpdateProductCommand;
+use Aa\AkeneoImport\ImportCommand\BaseCommand;
 use Aa\AkeneoImport\ImportCommand\Media\CreateProductMediaFile;
 
 /**
@@ -10,7 +10,7 @@ use Aa\AkeneoImport\ImportCommand\Media\CreateProductMediaFile;
  *
  * @see https://api.akeneo.com/api-reference.html#delete_products__code_
  */
-class DeleteProduct extends BaseUpdateProductCommand
+class DeleteProduct extends BaseCommand
 {
     public function __construct(string $identifier)
     {
