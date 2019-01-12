@@ -2,18 +2,28 @@
 
 namespace Aa\AkeneoImport\ImportCommand\Product;
 
-use Aa\AkeneoImport\ImportCommand\BaseCommand;
-use Aa\AkeneoImport\ImportCommand\Media\CreateProductMediaFile;
+use Aa\AkeneoImport\ImportCommand\CommandInterface;
+
 
 /**
  * Delete Product
  *
  * @see https://api.akeneo.com/api-reference.html#delete_products__code_
  */
-class DeleteProduct extends BaseCommand
+class DeleteProduct implements CommandInterface
 {
+    /**
+     * @var string
+     */
+    private $identifier;
+
     public function __construct(string $identifier)
     {
-        $this->set('identifier', $identifier);
+        $this->identifier = $identifier;
+    }
+
+    public function getIdentifier(): string
+    {
+        return $this->identifier;
     }
 }
