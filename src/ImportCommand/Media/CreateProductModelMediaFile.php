@@ -59,4 +59,29 @@ class CreateProductModelMediaFile implements ArrayFormattable, CommandInterface
             ]
         ];
     }
+
+    public function getFileName(): string
+    {
+        return $this->fileName;
+    }
+
+    public function getProductModelCode(): string
+    {
+        return $this->productModelCode;
+    }
+
+    public function getAttributeCode(): string
+    {
+        return $this->attributeCode;
+    }
+
+    public function getScope(): ?string
+    {
+        return $this->scope;
+    }
+
+    public function getLocale(): ?string
+    {
+        return $this->locale;
+    }
 }
