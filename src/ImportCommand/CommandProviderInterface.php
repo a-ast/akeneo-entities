@@ -5,7 +5,7 @@ namespace Aa\AkeneoImport\ImportCommand;
 interface CommandProviderInterface
 {
     /**
-     * @return \Traversable|\Aa\AkeneoImport\ImportCommand\CommandInterface[]
+     * @return \Aa\AkeneoImport\ImportCommand\CommandInterface[]
      */
-    public function getCommands(): \Traversable;
+    public function getCommands(): iterable;
 }
