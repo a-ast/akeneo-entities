@@ -22,6 +22,11 @@ class UpdateOrCreateProductBuilder
      */
     private $commands = [];
 
+    /**
+     * @var array
+     */
+    private $values = [];
+
     public function __construct(string $identifier)
     {
         $this->identifier = $identifier;
@@ -43,21 +48,32 @@ class UpdateOrCreateProductBuilder
 
     public function setEnabled(?bool $enabled): self
     {
-        $this->commands[] = new SetParent($this->identifier, $enabled);
+        $this->commands[] = new SetEnabled($this->identifier, $enabled);
 
         return $this;
     }
 
     public function setGroups(array $groups): self
     {
-        $this->commands[] = new SetParent($this->identifier, $groups);
+        $this->commands[] = new SetGroups($this->identifier, $groups);
 
         return $this;
     }
 
     public function setCategories(array $categories): self
     {
-        $this->commands[] = new SetParent($this->identifier, $categories);
+        $this->commands[] = new SetCategories($this->identifier, $categories);
+
+        return $this;
+    }
+
+    public function addValue(string $attributeCode, $data, ?string $locale = null, ?string $scope = null): self
+    {
+        $this->values[$attributeCode][] = [
+            'data' => $data,
+            'locale' => $locale,
+            'scope' => $scope,
+        ];
 
         return $this;
     }
@@ -71,6 +87,6 @@ class UpdateOrCreateProductBuilder
 
     public function getCommands(): iterable
     {
-        return $this->commands;
+        return $this->commands + [new SetValues($this->identifier, $this->values)];
     }
 }
