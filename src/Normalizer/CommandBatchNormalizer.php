@@ -11,9 +11,9 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 
-class CommandBatchNormalizer implements DenormalizerInterface, DenormalizerAwareInterface, NormalizerInterface, NormalizerAwareInterface
+class CommandBatchNormalizer implements DenormalizerInterface, DenormalizerAwareInterface /*, NormalizerInterface, NormalizerAwareInterface */
 {
-    use DenormalizerAwareTrait, NormalizerAwareTrait;
+    use DenormalizerAwareTrait/*, NormalizerAwareTrait*/;
 
     public function denormalize($data, $class, $format = null, array $context = array())
     {
@@ -33,22 +33,22 @@ class CommandBatchNormalizer implements DenormalizerInterface, DenormalizerAware
         return CommandBatch::class === $type;
     }
 
-    /**
-     * @param CommandBatch $object
-     */
-    public function normalize($object, $format = null, array $context = [])
-    {
-        $data = ['commandClass' => $object->getCommandClass()];
-
-        foreach ($object->getItems() as $item) {
-            $data['items'][] = $this->normalizer->normalize($item, $format, $context);
-        }
-
-        return $data;
-    }
-
-    public function supportsNormalization($data, $format = null)
-    {
-        return $data instanceof CommandBatchInterface;
-    }
+//    /**
+//     * @param CommandBatch $object
+//     */
+//    public function normalize($object, $format = null, array $context = [])
+//    {
+//        $data = ['commandClass' => $object->getCommandClass()];
+//
+//        foreach ($object->getItems() as $item) {
+//            $data['items'][] = $this->normalizer->normalize($item, $format, $context);
+//        }
+//
+//        return $data;
+//    }
+//
+//    public function supportsNormalization($data, $format = null)
+//    {
+//        return $data instanceof CommandBatchInterface;
+//    }
 }

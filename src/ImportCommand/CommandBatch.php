@@ -17,13 +17,13 @@ class CommandBatch implements CommandBatchInterface
      */
     private $items;
 
-    public function __construct(array $items = [])
+    public function __construct(array $items)
     {
         if (0 === count($items)) {
             throw new CommandBatchException('Empty command batches are not allowed.');
         }
 
-        $this->commandClass = get_class($items[0]);
+        $isFirst = true;
 
         foreach ($items as $item) {
 
@@ -31,7 +31,13 @@ class CommandBatch implements CommandBatchInterface
                 throw new CommandBatchException('Only instances of CommandInterface allowed.');
             }
 
-            if ($this->commandClass !== get_class($item)) {
+            if ($isFirst) {
+
+                $this->commandClass = $item->getType();
+                $isFirst = false;
+            }
+
+            if ($this->commandClass !== $item->getType()) {
                 throw new CommandBatchException('Commands of different types are not allowed');
             }
         }

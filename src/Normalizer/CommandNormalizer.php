@@ -4,6 +4,7 @@ namespace Aa\AkeneoImport\Normalizer;
 
 use Aa\AkeneoImport\ArrayFormattable;
 use Aa\AkeneoImport\ImportCommand\BaseCommand;
+use Aa\AkeneoImport\ImportCommand\CommandInterface;
 use ReflectionClass;
 use ReflectionMethod;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
@@ -36,18 +37,17 @@ class CommandNormalizer implements DenormalizerInterface, DenormalizerAwareInter
      */
     public function normalize($object, $format = null, array $context = [])
     {
-        $standardFormat = $object->toArray();
+        $data = $this->normalizer->normalize($object, $format, $context);
 
-        foreach ($standardFormat as &$item) {
-            $item = $this->normalizer->normalize($item, $format, $context);
-        }
-
-        return $standardFormat;
+        return [
+            'class' => get_class($object),
+            'data' => $data,
+        ];
     }
 
     public function supportsNormalization($data, $format = null)
     {
-        return $data instanceof ArrayFormattable;
+        return $data instanceof CommandInterface;
     }
 
 
