@@ -3,9 +3,9 @@
 namespace Aa\AkeneoImport\ImportCommand\Product;
 
 use Aa\AkeneoImport\ImportCommand\CommandInterface;
-use Aa\AkeneoImport\ImportCommand\CommandTypes;
 
-class SetCategories implements CommandInterface
+
+class SetCategories implements CommandInterface, ProductFieldInterface
 {
     /**
      * @var string
@@ -17,8 +17,6 @@ class SetCategories implements CommandInterface
      */
     private $categories;
 
-    /**
-     */
     public function __construct(string $productIdentifier, array $categories)
     {
         $this->productIdentifier = $productIdentifier;
@@ -33,10 +31,5 @@ class SetCategories implements CommandInterface
     public function getCategories(): array
     {
         return $this->categories;
-    }
-
-    public function getType(): string
-    {
-        return CommandTypes::PRODUCT;
     }
 }

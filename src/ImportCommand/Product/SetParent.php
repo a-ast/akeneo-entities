@@ -3,9 +3,9 @@
 namespace Aa\AkeneoImport\ImportCommand\Product;
 
 use Aa\AkeneoImport\ImportCommand\CommandInterface;
-use Aa\AkeneoImport\ImportCommand\CommandTypes;
 
-class SetParent implements CommandInterface
+
+class SetParent implements CommandInterface, ProductFieldInterface
 {
     /**
      * @var string
@@ -17,8 +17,6 @@ class SetParent implements CommandInterface
      */
     private $parent;
 
-    /**
-     */
     public function __construct(string $productIdentifier, ?string $parent = null)
     {
         $this->productIdentifier = $productIdentifier;
@@ -33,11 +31,5 @@ class SetParent implements CommandInterface
     public function getParent(): ?string
     {
         return $this->parent;
-    }
-
-
-    public function getType(): string
-    {
-        return CommandTypes::PRODUCT;
     }
 }

@@ -10,7 +10,7 @@ use Aa\AkeneoImport\ImportCommand\Media\CreateProductMediaFile;
  *
  * @see https://api.akeneo.com/api-reference.html#patch_products__code_
  */
-class UpdateOrCreateProductBuilder
+class ProductCommandBuilder
 {
     /**
      * @var string
@@ -26,6 +26,11 @@ class UpdateOrCreateProductBuilder
      * @var array
      */
     private $values = [];
+
+    /**
+     * @var array
+     */
+    private $associations;
 
     public function __construct(string $identifier)
     {
@@ -85,8 +90,50 @@ class UpdateOrCreateProductBuilder
         return $this;
     }
 
+    public function addImageValue(string $attributeCode, string $fileName, ?string $locale = null, ?string $scope = null): self
+    {
+        $this->addMediaValue($attributeCode, $fileName, $locale, $scope);
+
+        return $this;
+    }
+
+    public function addFileValue(string $attributeCode, string $fileName, ?string $locale = null, ?string $scope = null): self
+    {
+        $this->addMediaValue($attributeCode, $fileName, $locale, $scope);
+
+        return $this;
+    }
+
+    public function addAssociatedGroups(string $associationTypeCode, array $groupCodes): self
+    {
+        return $this->addAssociations('groups', $associationTypeCode, $groupCodes);
+    }
+
+    public function addAssociatedProducts(string $associationTypeCode, array $productIdentifiers): self
+    {
+        return $this->addAssociations('products', $associationTypeCode, $productIdentifiers);
+    }
+
+    public function addAssociatedProductModels(string $associationTypeCode, array $productModelCodes): self
+    {
+        return $this->addAssociations('product_models', $associationTypeCode, $productModelCodes);
+    }
+
+    private function addAssociations(string $associationEntity, string $associationTypeCode, array $identifiers): self
+    {
+        $existingIdentifiers = $this->associations[$associationTypeCode][$associationEntity] ?? [];
+
+        $this->associations[$associationTypeCode][$associationEntity] = array_merge($existingIdentifiers, $identifiers);
+
+        return $this;
+    }
+
+
     public function getCommands(): iterable
     {
-        return $this->commands + [new SetValues($this->identifier, $this->values)];
+        return $this->commands + [
+                new SetValues($this->identifier, $this->values),
+                new SetAssociations($this->identifier, $this->associations)
+            ];
     }
 }

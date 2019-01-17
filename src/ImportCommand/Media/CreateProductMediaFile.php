@@ -10,7 +10,7 @@ use Aa\AkeneoImport\ImportCommand\CommandInterface;
  *
  * @see https://api.akeneo.com/api-reference.html#post_media_files
  */
-class CreateProductMediaFile implements ArrayFormattable, CommandInterface
+class CreateProductMediaFile implements CommandInterface
 {
     /**
      * @var string
@@ -44,20 +44,6 @@ class CreateProductMediaFile implements ArrayFormattable, CommandInterface
         $this->attributeCode = $attributeCode;
         $this->scope = $scope;
         $this->locale = $locale;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'media' => $this->fileName,
-            'meta' => [
-                'identifier' => $this->productIdentifier,
-                'attribute' => $this->attributeCode,
-                'scope' => $this->scope,
-                'locale' => $this->locale,
-                'type' => 'product',
-            ]
-        ];
     }
 
     public function getFileName(): string

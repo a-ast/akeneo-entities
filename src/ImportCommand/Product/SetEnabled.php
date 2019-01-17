@@ -3,9 +3,9 @@
 namespace Aa\AkeneoImport\ImportCommand\Product;
 
 use Aa\AkeneoImport\ImportCommand\CommandInterface;
-use Aa\AkeneoImport\ImportCommand\CommandTypes;
 
-class SetEnabled implements CommandInterface
+
+class SetEnabled implements CommandInterface, ProductFieldInterface
 {
     /**
      * @var string
@@ -17,8 +17,6 @@ class SetEnabled implements CommandInterface
      */
     private $enabled;
 
-    /**
-     */
     public function __construct(string $productIdentifier, bool $enabled)
     {
         $this->productIdentifier = $productIdentifier;
@@ -33,10 +31,5 @@ class SetEnabled implements CommandInterface
     public function getEnabled(): bool
     {
         return $this->enabled;
-    }
-
-    public function getType(): string
-    {
-        return CommandTypes::PRODUCT;
     }
 }

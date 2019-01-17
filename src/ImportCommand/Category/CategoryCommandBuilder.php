@@ -2,37 +2,38 @@
 
 namespace Aa\AkeneoImport\ImportCommand\Category;
 
-use Aa\AkeneoImport\ImportCommand\BaseCommand;
-
 /**
  * Update or create categories
  *
  * @see: https://api.akeneo.com/api-reference.html#patch_categories
  */
-class UpdateOrCreateCategory extends BaseCommand
+class CategoryCommandBuilder
 {
+    /**
+     * @var string
+     */
+    private $code;
+
+    /**
+     * @var \Aa\AkeneoImport\ImportCommand\CommandInterface[]|array
+     */
+    private $commands = [];
+
     public function __construct(string $code)
     {
-        $this->set('code', $code);
+        $this->code = $code;
     }
 
     public function setParent(?string $parent): self
     {
-        $this->set('parent', $parent);
+        $this->commands[] = new SetParent($this->code, $parent);
 
         return $this;
     }
 
     public function setLabels(array $labels): self
     {
-        $this->set('labels', $labels);
-
-        return $this;
-    }
-
-    public function addLabel(string $label, string $locale): self
-    {
-        $this->data['labels'][$locale] = $label;
+        $this->commands[] = new SetLabels($this->code, $labels);
 
         return $this;
     }

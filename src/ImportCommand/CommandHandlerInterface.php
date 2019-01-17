@@ -4,7 +4,5 @@ namespace Aa\AkeneoImport\ImportCommand;
 
 interface CommandHandlerInterface
 {
-    public function handle(CommandBatchInterface $commands);
-
-    public function shouldKeepCommandOrder(): bool;
+    public function handle(CommandInterface $commands);
 }
