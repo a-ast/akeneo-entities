@@ -29,16 +29,16 @@ class ProductModelCommandBuilder
     /**
      * @var array
      */
-    private $associations;
+    private $associations = [];
 
     public function __construct(string $code)
     {
         $this->code = $code;
     }
 
-    public function setFamily(?string $family): self
+    public function setFamilyVariant(?string $familyVariant): self
     {
-        $this->commands[] = new SetFamilyVariant($this->code, $family);
+        $this->commands[] = new SetFamilyVariant($this->code, $familyVariant);
 
         return $this;
     }

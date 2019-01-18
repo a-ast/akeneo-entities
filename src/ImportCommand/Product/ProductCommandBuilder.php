@@ -30,7 +30,7 @@ class ProductCommandBuilder
     /**
      * @var array
      */
-    private $associations;
+    private $associations = [];
 
     public function __construct(string $identifier)
     {
