@@ -128,12 +128,18 @@ class ProductCommandBuilder
         return $this;
     }
 
-
     public function getCommands(): iterable
     {
-        return $this->commands + [
-                new SetValues($this->identifier, $this->values),
-                new SetAssociations($this->identifier, $this->associations)
-            ];
+        $commands = $this->commands;
+
+        if (count($this->values) > 0) {
+            $commands = array_merge($commands, [new SetValues($this->identifier, $this->values)]);
+        }
+
+        if (count($this->associations) > 0) {
+            $commands = array_merge($commands, [new SetAssociations($this->identifier, $this->associations)]);
+        }
+
+        return $commands;
     }
 }
