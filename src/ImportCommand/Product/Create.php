@@ -12,7 +12,7 @@ class Create implements CommandInterface, ProductFieldInterface
      */
     private $productIdentifier;
 
-    public function __construct(string $productIdentifier, array $associations)
+    public function __construct(string $productIdentifier)
     {
         $this->productIdentifier = $productIdentifier;
     }
