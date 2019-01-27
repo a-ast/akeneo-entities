@@ -2,7 +2,7 @@
 
 namespace Aa\AkeneoImport\ImportCommand;
 
-interface InitializableCommandHandlerInterface extends CommandHandlerInterface
+interface InitializableCommandHandlerInterface
 {
     public function setUp();
 
