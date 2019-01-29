@@ -29,14 +29,14 @@ class CommandCallbacksSpec extends ObjectBehavior
         $this->repeat($command->getWrappedObject());
     }
 
-    function it_does_not_call_repeat_if_repeat_callback_not_set(TestCommand $command)
+    function it_does_not_call_repeat_if_repeat_callback_not_set(Command $command)
     {
         $command->call()->shouldNotBeCalled();
 
         $this->repeat($command->getWrappedObject());
     }
 
-    function it_can_call_reject(TestCommand $command)
+    function it_can_call_reject(Command $command)
     {
         $reject = new class {
 
