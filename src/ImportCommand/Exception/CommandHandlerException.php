@@ -18,7 +18,7 @@ class CommandHandlerException extends RuntimeException
      */
     private $errors;
 
-    public function __construct($message = '', $code = 0, CommandInterface $command, array $errors, Throwable $previous = null)
+    public function __construct($message = '', CommandInterface $command, $code = 0, array $errors = [], Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
 
