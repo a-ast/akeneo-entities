@@ -10,7 +10,7 @@ use Aa\AkeneoImport\ImportCommand\CommandInterface;
  *
  * @see https://api.akeneo.com/api-reference.html#delete_products__code_
  */
-class DeleteProduct implements CommandInterface
+class Delete implements CommandInterface
 {
     /**
      * @var string
