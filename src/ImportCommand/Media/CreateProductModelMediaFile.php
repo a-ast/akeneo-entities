@@ -37,7 +37,7 @@ class CreateProductModelMediaFile implements CommandInterface
      */
     private $locale;
 
-    public function __construct(string $fileName, string $productModelCode, string $attributeCode, ?string $scope = null, ?string $locale = null)
+    public function __construct(string $productModelCode, string $fileName, string $attributeCode, ?string $scope = null, ?string $locale = null)
     {
         $this->fileName = $fileName;
         $this->productModelCode = $productModelCode;

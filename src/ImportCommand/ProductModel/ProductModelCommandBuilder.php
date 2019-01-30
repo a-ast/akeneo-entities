@@ -70,7 +70,7 @@ class ProductModelCommandBuilder
 
     public function addMediaValue(string $attributeCode, string $fileName, ?string $locale = null, ?string $scope = null): self
     {
-        $this->commands[] = new CreateProductMediaFile($fileName, $this->code, $attributeCode, $scope, $locale);
+        $this->commands[] = new CreateProductMediaFile($this->code, $fileName, $attributeCode, $scope, $locale);
 
         return $this;
     }
