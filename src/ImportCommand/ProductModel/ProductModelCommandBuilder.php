@@ -2,7 +2,7 @@
 
 namespace Aa\AkeneoImport\ImportCommand\ProductModel;
 
-use Aa\AkeneoImport\ImportCommand\Media\CreateProductMediaFile;
+use Aa\AkeneoImport\ImportCommand\Media\CreateProductModelMediaFile;
 
 /**
  * Update Product model
@@ -70,7 +70,7 @@ class ProductModelCommandBuilder
 
     public function addMediaValue(string $attributeCode, string $fileName, ?string $locale = null, ?string $scope = null): self
     {
-        $this->commands[] = new CreateProductMediaFile($this->code, $fileName, $attributeCode, $scope, $locale);
+        $this->commands[] = new CreateProductModelMediaFile($this->code, $fileName, $attributeCode, $scope, $locale);
 
         return $this;
     }
