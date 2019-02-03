@@ -20,13 +20,13 @@ class CommandCallbacks
         $this->onReject = $onReject;
     }
 
-    public function repeat(CommandInterface $command)
+    public function repeat(CommandInterface $command, string $message = '', int $code = 0, array $errors = [])
     {
         if (null === $this->onRepeat) {
             return;
         }
 
-        ($this->onRepeat)($command);
+        ($this->onRepeat)($command, $message, $code, $errors);
     }
 
     public function reject(CommandInterface $command, string $message = '', int $code = 0, array $errors = [])
