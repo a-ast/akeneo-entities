@@ -54,7 +54,6 @@ class CommandCallbacksSpec extends ObjectBehavior
 
     function it_does_not_call_reject_if_reject_callback_not_set(Command $command)
     {
-
         $command->call()->shouldNotBeCalled();
 
         $this->reject($command->getWrappedObject());
